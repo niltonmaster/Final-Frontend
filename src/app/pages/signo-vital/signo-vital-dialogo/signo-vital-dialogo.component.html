@@ -1,0 +1,33 @@
+<mat-toolbar>Nuevo Paciente</mat-toolbar>
+
+<form class="example-container" [formGroup]="form" #frmPaciente="ngForm" (ngSubmit)="operar()">
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="Nombres" [(ngModel)]="paciente.nombres" required formControlName="nombres">
+            <small *ngIf="f.nombres.errors?.required" style="color: red;">Nombres es requerido</small>
+            <small *ngIf="f.nombres.errors?.minlength" style="color: red;">El campo debe ser mayor a 3 caracteres</small>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Apellidos" [(ngModel)]="paciente.apellidos" required formControlName="apellidos">
+            <small *ngIf="f.apellidos.errors?.required" style="color: red;">Apellido es requerido</small>
+            <small *ngIf="f.apellidos.errors?.minlength" style="color: red;">El campo debe ser mayor a 3 caracteres</small>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="DNI" [(ngModel)]="paciente.dni" required formControlName="dni">
+            <small *ngIf="f.dni.errors?.required" style="color: red;">DNI es requerido</small>
+            <small *ngIf="f.dni.errors?.minlength" style="color: red;">El campo debe tener 8 dígitos</small>
+            <small *ngIf="f.dni.errors?.maxlength" style="color: red;">El campo no debe tener más de 8 dígitos</small>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Telefono" [(ngModel)]="paciente.telefono" required formControlName="telefono">
+            <small *ngIf="f.telefono.errors?.required" style="color: red;">Telefono es requerido</small>
+            <small *ngIf="f.telefono.errors?.minlength" style="color: red;">El campo debe tener 9 dígitos</small>
+            <small *ngIf="f.telefono.errors?.maxlength" style="color: red;">El campo no debe tener más de 9 dígitos</small>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Direccion" [(ngModel)]="paciente.direccion" formControlName="direccion">
+        </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmPaciente.invalid">Aceptar</button>
+    <button mat-raised-button color="accent" (click)="cancelar()">Cancelar</button>
+</form>

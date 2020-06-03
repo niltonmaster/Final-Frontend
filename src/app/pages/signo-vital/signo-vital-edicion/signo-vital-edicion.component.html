@@ -1,0 +1,60 @@
+<form class="example-container" [formGroup]="form" #frmSignoVital="ngForm" (ngSubmit)="operar()">
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="id">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field>
+        <input type="text" placeholder="Paciente" matInput [matAutocomplete]="autoPaciente" [formControl]="myControlPaciente" required formControlName="paciente">
+    </mat-form-field>
+    <mat-autocomplete #autoPaciente="matAutocomplete" [displayWith]="mostrarPaciente" (optionSelected)="seleccionarPaciente($event)">
+        <mat-option *ngFor="let p of pacientesFiltrados | async" [value]="p">
+            {{ p.nombres }} {{p.apellidos}}
+        </mat-option>
+    </mat-autocomplete>
+
+    <!-- Abrir DIalogo -->
+    <button mat-flat-button color="basic" (click)="abrirDialogo()" type="button" style=" margin-bottom: 10px;float:left;width: 30%;outline:yellowgreen solid thin">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>Nuevo Paciente</span>
+    </button>
+
+    <div style="clear:both"></div>
+
+    <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Escoge una fecha" [max]="maxFecha" required formControlName="fecha" [(ngModel)]="dateS">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker (selectedChanged)="onDate($event)"></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Temperatura" [(ngModel)]="temperatura" minlength="3" required formControlName="temperatura">
+        <small *ngIf="f.temperatura.errors?.required" style="color: red;">Temperatura es requerida</small>
+        <small *ngIf="f.temperatura.errors?.minlength" style="color: red;">El campo debe ser mayor a 3 caracteres</small>
+
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Pulso" [(ngModel)]="pulso" minlength="5" required formControlName="pulso">
+        <small *ngIf="f.pulso.errors?.required" style="color: red;">Pulso es requerido</small>
+        <small *ngIf="f.pulso.errors?.minlength" style="color: red;">El campo debe ser mayor a 5 caracteres</small>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Ritmo Respiratorio" [(ngModel)]="ritmoRespiratorio" minlength="5" required formControlName="ritmoRespiratorio">
+        <small *ngIf="f.ritmoRespiratorio.errors?.required" style="color: red;">Ritmo Respiratorio es requerido</small>
+        <small *ngIf="f.ritmoRespiratorio.errors?.minlength" style="color: red;">El campo debe ser mayor a 5 caracteres</small>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!estadoBotonAceptar()">
+        <mat-icon>done</mat-icon>
+        <span>Aceptar</span>
+    </button>
+    <button mat-raised-button color="accent" routerLink='/signo-vital' type="button">
+        <mat-icon>close</mat-icon>
+        <span>Cancelar</span>
+    </button>
+
+</form>

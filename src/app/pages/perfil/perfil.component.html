@@ -1,0 +1,28 @@
+<mat-toolbar style="text-align: center;">Información del usuario</mat-toolbar>
+
+<mat-card>Nombre del usuario:
+
+    <!-- <mat-icon>stop_circle</mat-icon> -->
+    <!-- <span>{{usuario}}</span> -->
+</mat-card>
+<mat-icon>check</mat-icon>
+<span>{{usuario}}</span>
+
+<br>
+
+<!-- <div *ngFor="let m of roles">
+    <mat-icon>{{m.icono}}</mat-icon>
+    <span>{{m}}</span>
+    <mat-divider></mat-divider>
+</div> -->
+
+
+
+<mat-card>Roles del usuario: </mat-card>
+<mat-list *ngFor="let m of roles">
+    <mat-icon>check</mat-icon>
+    <!-- <mat-list-item>{{m}}</mat-list-item> -->
+    <span>{{m}}</span>
+    <mat-divider></mat-divider>
+
+</mat-list>
